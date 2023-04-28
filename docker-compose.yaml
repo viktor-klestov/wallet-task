@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  wallet:
+    build: .
+    ports:
+      - "8080:8080"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: wallet
+      POSTGRES_USER: wallet
+      POSTGRES_PASSWORD: pass
+    ports:
+      - '5432:5432'
+  front:
+    image: node:20-alpine
